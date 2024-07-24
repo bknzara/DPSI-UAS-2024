@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser'); 
 const app = express();
 const port = 3000;
+const sequelize = require('./models/index');
+
 
 const mahasiswaRouter = require('./routes/mahasiswa');
 const pesanRouter = require('./routes/pesan');
@@ -23,3 +25,12 @@ app.use('/auth', authRouter);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
