@@ -23,8 +23,6 @@ app.use('/formulir-perwalian', formulirPerwalianRouter);
 app.use('/jadwal-perwalian', jadwalPerwalianRouter);
 app.use('/auth', authRouter);
 
-app.use(express.static('public')); // Pastikan file `index.js` tidak berada di dalam folder `public`
-
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
