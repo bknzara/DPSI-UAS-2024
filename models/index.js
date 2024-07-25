@@ -1,11 +1,15 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 // Konfigurasi koneksi Sequelize
-const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
-    host: process.env.HOST,
-    dialect: 'mysql',
-    logging: console.log 
-  });
+const sequelize = new Sequelize({
+  host: process.env.HOST,
+  username: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  dialect: 'mysql',
+  dialectModule: require('mysql2'),
+  benchmark: true
+});
 // Uji koneksi
 sequelize.authenticate()
  .then(() => {
