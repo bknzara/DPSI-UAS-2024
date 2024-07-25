@@ -1,7 +1,8 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 // Konfigurasi koneksi Sequelize
-const sequelize = new Sequelize('sql12721990', 'sql12721990', 'Ggig9GqzFP', {
-    host: 'sql12.freesqldatabase.com',
+const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
+    host: process.env.HOST,
     dialect: 'mysql',
     logging: console.log 
   });
