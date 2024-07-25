@@ -24,6 +24,11 @@ app.use('/formulir-perwalian', formulirPerwalianRouter);
 app.use('/jadwal-perwalian', jadwalPerwalianRouter);
 app.use('/auth', authRouter);
 
+// Define the home route
+router.get('/', (req, res) => {
+  res.send('Selamat datang di API sistem saya');
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
