@@ -25,7 +25,7 @@ app.use('/jadwal-perwalian', jadwalPerwalianRouter);
 app.use('/auth', authRouter);
 
 // Define the home route
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Selamat datang di API sistem saya');
 });
 
