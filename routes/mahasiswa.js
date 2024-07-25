@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Mahasiswa = require('../models/mahasiswa');
 const { authenticate, authorize } = require('../middleware/auth');
-
+const authorizeRoles = authorize(['mahasiswa', 'dpa']);
 // Create
-router.post('/',  authenticate, authorize(['mahasiswa']), async (req, res) => {
+router.post('/',  authenticate, authorizeRoles, async (req, res) => {
   try {
     const mahasiswa = await Mahasiswa.create(req.body);
     res.status(201).json(mahasiswa);
@@ -14,7 +14,7 @@ router.post('/',  authenticate, authorize(['mahasiswa']), async (req, res) => {
 });
 
 // Read all
-router.get('/',  authenticate, authorize(['mahasiswa']), async (req, res) => {
+router.get('/',  authenticate, authorizeRoles, async (req, res) => {
   try {
     const mahasiswa = await Mahasiswa.findAll();
     res.status(200).json(mahasiswa);
@@ -24,7 +24,7 @@ router.get('/',  authenticate, authorize(['mahasiswa']), async (req, res) => {
 });
 
 // Read one
-router.get('/:id',  authenticate, authorize(['mahasiswa']), async (req, res) => {
+router.get('/:id',  authenticate, authorizeRoles, async (req, res) => {
   try {
     const mahasiswa = await Mahasiswa.findByPk(req.params.id);
     if (mahasiswa) {
@@ -38,7 +38,7 @@ router.get('/:id',  authenticate, authorize(['mahasiswa']), async (req, res) => 
 });
 
 // Update
-router.put('/:id',  authenticate, authorize(['mahasiswa']), async (req, res) => {
+router.put('/:id',  authenticate, authorizeRoles, async (req, res) => {
   try {
     const [updated] = await Mahasiswa.update(req.body, {
       where: { ID_Mahasiswa: req.params.id }
@@ -55,7 +55,7 @@ router.put('/:id',  authenticate, authorize(['mahasiswa']), async (req, res) => 
 });
 
 // Delete
-router.delete('/:id',  authenticate, authorize(['mahasiswa']), async (req, res) => {
+router.delete('/:id', authenticate, authorizeRoles, async (req, res) => {
   try {
     const deleted = await Mahasiswa.destroy({
       where: { ID_Mahasiswa: req.params.id }
