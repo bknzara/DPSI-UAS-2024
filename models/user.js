@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('./index'); // Sesuaikan dengan path koneksi Sequelize
+const sequelize = require('./index'); 
 const bcrypt = require('bcryptjs');
 
 // Mendefinisikan model User
